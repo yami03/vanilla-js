@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <!-- <h2>Update CSS Variables with <span class='hl'>JS</span></h2> -->
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width: 100px;
+    }
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+  </style>
+
+  <script>
+    const html = document.getElementsByTagName("html")[0];
+    const spacing = document.getElementById("spacing");
+    const base = document.getElementById("base"); 
+    const blur = document.getElementById("blur");
+    
+    
+    
+    document.querySelector('input[name="spacing"]').onchange = function(){
+      html.style.setProperty("--spacing", `${spacing.value}${spacing.dataset.sizing}`);
+    };
+    document.querySelector('input[name="blur"]').onchange = function(){
+      html.style.setProperty("--blur", `${blur.value}${blur.dataset.sizing}`);
+    };
+    document.querySelector('input[name="base"]').onchange = function(){
+      html.style.setProperty("--base", `${base.value}`);
+    };
+  </script>
+
+</body>
+</html>
+<!-- 
+https://stackoverflow.com/questions/41370741/how-do-i-edit-a-css-variable-using-js
+
+https://developer.mozilla.org/ko/docs/Web/CSS/Using_CSS_variables
+
+https://medium.com/@_bengarrison/accessing-and-modifying-css-variables-with-javascript-2ccb735bbff0
+
+-->
