@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+    //Break on -> attribute modifications -> 화면에서 확인하고자 하는걸 클릭한다.
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated - %s에 넣고 싶은걸 2번째에 넣는다. 
+    console.log('Hello I am a %s string!', '💩');
+
+    // Styled - %c를 넣어주면 스타일을 바꿀 수 있다.
+    console.log('%c hohohoho','font-size:50px')
+
+    // warning! - 노란색 ! 삼각형
+    console.warn('OH NOOO');
+
+    // Error - 빨간색 동그라미 x 
+    console.error('OH NOOO');
+
+    // Info - nothing????????? 
+    console.info('tmi');
+
+    // Testing - ture인지 체크해주고 false 일때 2번째 내용을 console에서 볼 수 있다.
+    console.assert(1===2,'assert는 주장하다 error랑 같은 모양')
+
+    // clearing
+    console.clear();    
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    console.dir(p);
+    //methods를 보고 싶다면 dir를 쓴다. 
+
+    // Grouping together
+    dogs.map(dog =>{
+      //console.group(`${dog.name}`);
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`이름은 ${dog.name}쓰`);
+      console.log(`나이는 ${dog.age}쓰`);
+      console.log(`사람 나이는 ${dog.age*7}쓰`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('hehehehehe');
+
+    // timing
+    console.time('fetching time');
+    fetch('https://api.github.com/users/yami03')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching time');
+        console.log(data)
+      });
+
+      //table
+      console.table(dogs);
+  </script>
+</body>
+</html>
