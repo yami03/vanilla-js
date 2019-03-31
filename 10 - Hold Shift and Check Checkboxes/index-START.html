@@ -97,17 +97,54 @@
 
 <script>
   //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey 키보드 이벤트 관련 
+  /*
+  * beforeIdx: 이전 체크한 체크박스의 index
+  * startIdx: shift로 클릭시 체크박스 for문을 위한 start Index
+  * endIdx: for문을 위한 end Index
+  */
+  var beforeIdx = null;
+  var startIdx = null;
+  var endIdx = null;
 
   var checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
   //console.log(checkboxs);
+
   checkboxs.forEach((el,idx) => {
+
     el.addEventListener("click", function (e) {
       //console.log("changed");
       //console.log(e.shiftKey);
+
       if (e.shiftKey) {
-        console.log(idx);
-        
+
+        /*for문 start지점과 end지점을 지정*/
+        if (beforeIdx == null || beforeIdx == (checkboxs.length-1)) {
+          startIdx = idx;
+          endIdx = checkboxs.length - 1;
+
+        }else{
+
+          if (beforeIdx < idx) {
+            startIdx = beforeIdx;
+            endIdx = idx;
+
+          }else if(beforeIdx > idx){
+            startIdx = idx;
+            endIdx = beforeIdx;
+
+          }else if(beforeIdx == idx){
+            return false;
+          }
+
+        }
+
+        for(var i = startIdx; i<= endIdx; i++){
+          checkboxs[i].checked = true;
+        }
+
       }
+      
+      beforeIdx = idx;
     });
   });
 </script>
