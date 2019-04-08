@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+const pressed = [];
+const secretCode = 'slaslaya';
+
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  pressed.push(e.key);
+  //마지막으로 쓴 글자로 부터 시크릿숫자 갯수 만큼 자르고 (끝으로 부터 8글자를 자르고)
+  //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  console.log(pressed);
+})
+</script>
+</body>
+</html>
