@@ -14,6 +14,9 @@ window.addEventListener('keyup', (e) => {
   console.log(e.key);
   pressed.push(e.key);
   //마지막으로 쓴 글자로 부터 시크릿숫자 갯수 만큼 자르고 (끝으로 부터 8글자를 자르고)
+  //앞에서 부터 자르기 위해서 뒤에서 부터 자른다.
+  //두번째 인자 deleteCount는
+  //초과된 자리수를 자르기 위한것 'ㅁ'/
   //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
   pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
   console.log(pressed);
